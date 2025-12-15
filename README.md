@@ -89,7 +89,7 @@ A* 알고리즘을\
 Relic Jackal은\
 완성된 게임을 목표로 한 프로젝트가 아니라,
 
-- A* 알고리즘을 실제 게임 구조에 적용해 보고\
+- A* 알고리즘을 실제 게임 구조에 적용해 보고
 - 기획자가 시스템을 어떻게 설계해야 하는지 연습하기 위한 프로젝트입니다.
 
 기능 구현보다\
@@ -107,18 +107,6 @@ Relic Jackal은\
 
 ---
 
-## Additional References
-
-- System Design PDF\
-  (전체 구조 정리 문서)
-
-- Design Concept Document\
-  (기획 초안)
-
-- GitHub Repository\
-  (본 저장소)
-
----
 
 ## Author
 
