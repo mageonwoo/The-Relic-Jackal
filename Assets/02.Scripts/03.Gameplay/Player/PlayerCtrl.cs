@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
-    public BoardManager board;
+    [SerializeField] private BoardManager board;
+    [SerializeField] private BoardPathHighlighter highlighter;
     public int x;
     public int y;
 
@@ -45,6 +46,22 @@ public class PlayerCtrl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
             TestPath();
+
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            if (board == null) return;
+            if (highlighter == null) return;
+
+            var cells = new List<Vector2Int>
+            {
+                new Vector2Int(0,0),
+                new Vector2Int(1,0),
+                new Vector2Int(3,0),
+                new Vector2Int(4,4),
+            };
+
+            highlighter.ShowCells(board, cells, BoardPathHighlighter.HLLayer.Path);
+        }
     }
 
     void TryMove(int dx, int dy)
@@ -120,5 +137,39 @@ public class PlayerCtrl : MonoBehaviour
             yield return new WaitForSeconds(stepDelay);
         }
         _followCor = null;
+    }
+
+    public void StopFollowPath()
+    {
+        if (_followCor != null)
+        {
+            StopCoroutine(_followCor);
+            _followCor = null;
+        }
+    }
+
+    public void SetGridPos(int resetX, int resetY)
+    {
+        if (board == null || board.grid == null)
+        {
+            Debug.LogError("SetGridPos: BoardManager 누락");
+            return;
+        }
+
+        if (resetX < 0 || resetY < 0 || resetX >= board.width || resetY >= board.height)
+        {
+            Debug.LogError("SetGridPos: 보드 범위 초과, 리셋 불가능");
+            return;
+        }
+
+        if (board.grid[resetX, resetY].walkable == false)
+        {
+            Debug.LogError("SetGridPos: reset포지션에 장애물 존재, 리셋 불가능");
+            return;
+        }
+
+        x = resetX;
+        y = resetY;
+        transform.position = board.grid[x, y].worldPos;
     }
 }

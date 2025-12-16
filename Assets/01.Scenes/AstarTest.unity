@@ -122,6 +122,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &197180011 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 105497449306879062, guid: dab8863076baf4548b41435dce3eca36, type: 3}
+  m_PrefabInstance: {fileID: 3536090135127353845}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a300d5832c975e14c9e03c58005335de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,7 +193,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -318,6 +329,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2136277920}
   - component: {fileID: 2136277919}
+  - component: {fileID: 2136277922}
+  - component: {fileID: 2136277921}
+  - component: {fileID: 2136277923}
   m_Layer: 0
   m_Name: BoardManager
   m_TagString: Untagged
@@ -357,6 +371,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2136277921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136277918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7377b93b00e514391e5b81a926e131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  board: {fileID: 2136277919}
+  player: {fileID: 197180011}
+--- !u!114 &2136277922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136277918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8616e2f146ba5a042bb8b6b90f7dc905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reset: {fileID: 2136277921}
+--- !u!114 &2136277923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136277918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ede4c61d4c615ff49a8dbc7064c59d0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  configs:
+  - layer: 0
+    pathPrefab: {fileID: 204516513278351052, guid: 485ba96c4e0b96142960fd0c1c5f3bf5, type: 3}
+    yOffset: 0
+  - layer: 1
+    pathPrefab: {fileID: 204516513278351052, guid: 20360f5246b474c47b8138fd91b6e8bd, type: 3}
+    yOffset: 0
+  - layer: 2
+    pathPrefab: {fileID: 204516513278351052, guid: c9b0384c9cd28b54fbb688b87dd57531, type: 3}
+    yOffset: 0
+  - layer: 3
+    pathPrefab: {fileID: 204516513278351052, guid: 1fa73a65448a6b241837859d6be40204, type: 3}
+    yOffset: 0
 --- !u!1001 &3536090135127353845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -369,6 +435,10 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 2136277919}
+    - target: {fileID: 105497449306879062, guid: dab8863076baf4548b41435dce3eca36, type: 3}
+      propertyPath: highlighter
+      value: 
+      objectReference: {fileID: 2136277923}
     - target: {fileID: 1849609041098818309, guid: dab8863076baf4548b41435dce3eca36, type: 3}
       propertyPath: m_Name
       value: TestPlayer
