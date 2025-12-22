@@ -1,17 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+
+using Gameplay.Board.Highlighter;
+using Gameplay.Board.PathCalculator;
+
 using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
     [SerializeField] private BoardManager board;
     [SerializeField] private BoardPathHighlighter highlighter;
+    public MoveCostBudget moveBudget { get; private set; }
+    [SerializeField] private int baseMoveCost = 10;
     public int x;
     public int y;
 
     public float stepDelay = 0.5f;
     private List<Vector2Int> _testpath;
     private Coroutine _followCor;
+
+    void Awake()
+    {
+        moveBudget = new MoveCostBudget(baseMoveCost);
+    }
 
     // Update is called once per frame
     void Start()
@@ -60,7 +71,7 @@ public class PlayerCtrl : MonoBehaviour
                 new Vector2Int(4,4),
             };
 
-            highlighter.ShowCells(board, cells, BoardPathHighlighter.HLLayer.Path);
+            highlighter.ShowCells(board, cells, HLLayer.Path);
         }
     }
 

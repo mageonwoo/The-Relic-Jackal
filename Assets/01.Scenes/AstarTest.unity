@@ -319,6 +319,103 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &1469339108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1469339112}
+  - component: {fileID: 1469339111}
+  - component: {fileID: 1469339110}
+  - component: {fileID: 1469339109}
+  - component: {fileID: 1469339113}
+  m_Layer: 0
+  m_Name: DeveloperTool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1469339109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469339108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 919db6d9caa53f7429336bd482d1553f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  board: {fileID: 2136277919}
+  player: {fileID: 197180011}
+  highlighter: {fileID: 2136277921}
+  hintLength: 7
+--- !u!114 &1469339110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469339108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7377b93b00e514391e5b81a926e131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  board: {fileID: 2136277919}
+  player: {fileID: 197180011}
+  highlighter: {fileID: 2136277921}
+--- !u!114 &1469339111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469339108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8616e2f146ba5a042bb8b6b90f7dc905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reset: {fileID: 1469339110}
+  highlighter: {fileID: 2136277921}
+  hintPipeline: {fileID: 1469339109}
+  reachablePipeline: {fileID: 1469339113}
+--- !u!4 &1469339112
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469339108}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1469339113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469339108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7e6ebe868516d4fb7c77a7d9fa6db5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  board: {fileID: 2136277919}
+  player: {fileID: 197180011}
+  highlighter: {fileID: 2136277921}
 --- !u!1 &2136277918
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,9 +426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2136277920}
   - component: {fileID: 2136277919}
-  - component: {fileID: 2136277922}
   - component: {fileID: 2136277921}
-  - component: {fileID: 2136277923}
   m_Layer: 0
   m_Name: BoardManager
   m_TagString: Untagged
@@ -353,6 +448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 883077556275904352, guid: 020ea8688ee4f3c4a90c8fb2e7e8e4fa, type: 3}
   obstaclePrefab: {fileID: 883077556275904352, guid: e73fb247ac861304d9644bb0a10bfb4f, type: 3}
+  goalPrefab: {fileID: 883077556275904352, guid: 8d110434268a99048be65b403f22c1a7, type: 3}
   boardMapData: {fileID: 11400000, guid: c71e261a2325f1d4da207040ccb044fc, type: 2}
   width: 8
   height: 8
@@ -380,49 +476,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 2136277918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c7377b93b00e514391e5b81a926e131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  board: {fileID: 2136277919}
-  player: {fileID: 197180011}
---- !u!114 &2136277922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136277918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8616e2f146ba5a042bb8b6b90f7dc905, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reset: {fileID: 2136277921}
---- !u!114 &2136277923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136277918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ede4c61d4c615ff49a8dbc7064c59d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   configs:
   - layer: 0
     pathPrefab: {fileID: 204516513278351052, guid: 485ba96c4e0b96142960fd0c1c5f3bf5, type: 3}
-    yOffset: 0
+    yOffset: -0.5
   - layer: 1
     pathPrefab: {fileID: 204516513278351052, guid: 20360f5246b474c47b8138fd91b6e8bd, type: 3}
-    yOffset: 0
+    yOffset: -0.5
   - layer: 2
     pathPrefab: {fileID: 204516513278351052, guid: c9b0384c9cd28b54fbb688b87dd57531, type: 3}
-    yOffset: 0
+    yOffset: 0.5
   - layer: 3
     pathPrefab: {fileID: 204516513278351052, guid: 1fa73a65448a6b241837859d6be40204, type: 3}
-    yOffset: 0
+    yOffset: -0.5
 --- !u!1001 &3536090135127353845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -438,7 +507,11 @@ PrefabInstance:
     - target: {fileID: 105497449306879062, guid: dab8863076baf4548b41435dce3eca36, type: 3}
       propertyPath: highlighter
       value: 
-      objectReference: {fileID: 2136277923}
+      objectReference: {fileID: 2136277921}
+    - target: {fileID: 105497449306879062, guid: dab8863076baf4548b41435dce3eca36, type: 3}
+      propertyPath: baseMoveCost
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1849609041098818309, guid: dab8863076baf4548b41435dce3eca36, type: 3}
       propertyPath: m_Name
       value: TestPlayer
@@ -500,3 +573,4 @@ SceneRoots:
   - {fileID: 2136277920}
   - {fileID: 858783105}
   - {fileID: 3536090135127353845}
+  - {fileID: 1469339112}

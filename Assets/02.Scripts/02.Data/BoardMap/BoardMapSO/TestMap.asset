@@ -35,3 +35,4 @@ MonoBehaviour:
   traps: []
   enemySpawns: []
   playerSpawn: {x: 2, y: 0}
+  GoalPoint: {x: 7, y: 7}

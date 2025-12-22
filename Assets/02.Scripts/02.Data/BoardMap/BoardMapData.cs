@@ -11,4 +11,5 @@ public class BoardMapData : ScriptableObject
     public List<Vector2Int> enemySpawns;
 
     public Vector2Int playerSpawn;
+    public Vector2Int GoalPoint;
 }
