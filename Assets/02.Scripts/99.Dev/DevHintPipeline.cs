@@ -35,7 +35,8 @@ public class DevHintPipeline : MonoBehaviour
         if (highlighter == null) return;
         if (board.boardMapData == null) return;
 
-        Vector2Int goal = board.boardMapData.GoalPoint;
+        Vector2Int playerPos = new Vector2Int(player.x, player.y);
+        Vector2Int goalPos = board.boardMapData.GoalPoint;
 
         // HintPathCalculator는 전체경로에서 힌트경로를 계산할 뿐, 경로를 직접 만들지는 못함.
         // AstarPathFinder는 경로를 만드는 역할을 하지만, 저장하거나 유지하지 않음.
@@ -44,7 +45,7 @@ public class DevHintPipeline : MonoBehaviour
         // 외부에서 준비한 전체경로와 코스트자산을 근거로 HintPathCalculator에서 힌트 경로를 계산해
         // Highlighter.ShowCells를 통해 시각적으로 출력하는 파이프라인을 거친다.
         List<Vector2Int> fullPath =
-            AstarPathfinder.FindPath(board, player.x, player.y, goal.x, goal.y);
+            AstarPathfinder.FindPath(board, playerPos, goalPos);
         if (fullPath == null || fullPath.Count == 0)
         {
             Debug.Log("ShowHint: fullPath 없음");

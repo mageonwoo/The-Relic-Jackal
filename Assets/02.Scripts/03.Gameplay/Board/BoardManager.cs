@@ -29,6 +29,18 @@ public class BoardManager : MonoBehaviour
                 p.y < grid.GetLength(1);
     }
 
+    public bool IsWalkable(Vector2Int p)
+    {
+        if (!InBounds(p)) return false;
+        else
+            return grid[p.x, p.y].walkable;
+    }
+
+    public int GetCost(Vector2Int p)
+    {
+        return grid[p.x, p.y].cost;
+    }
+
     void GenerateGrid()
     {
         grid = new Tile[width, height];

@@ -193,7 +193,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -520,6 +520,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2775779472987270618, guid: dab8863076baf4548b41435dce3eca36, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 69a7171c5e800334e81e68a2bd9b36d9, type: 2}
     - target: {fileID: 2919527717975728857, guid: dab8863076baf4548b41435dce3eca36, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

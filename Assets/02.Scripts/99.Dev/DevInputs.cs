@@ -7,7 +7,7 @@ using Gameplay.Board.PathCalculator;
 public sealed class DevInputs : MonoBehaviour
 {
     [SerializeField] private DevReset reset;
-    //디버그용으로 남겨 놓음. 입력 스크립트로 옮길 때 필요할 수도 있음.
+    // 디버그용으로 남겨 놓음. 입력 스크립트로 옮길 때 필요할 수도 있음.
     [SerializeField] private BoardPathHighlighter highlighter;
     [SerializeField] private DevHintPipeline hintPipeline;
     [SerializeField] private DevReachablePipeline reachablePipeline;

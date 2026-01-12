@@ -102,10 +102,10 @@ public class PlayerCtrl : MonoBehaviour
             return;
         }
 
-        int goalX = board.width - 1;
-        int goalY = board.height - 1;
+        var startPos = new Vector2Int(x, y);
+        var goalPos = new Vector2Int(board.width - 1, board.height - 1);
 
-        var path = AstarPathfinder.FindPath(board, x, y, goalX, goalY);
+        var path = AstarPathfinder.FindPath(board, startPos, goalPos);
 
         if (path == null)
         {
