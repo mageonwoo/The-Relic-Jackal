@@ -21,12 +21,9 @@ using UnityEngine;
 //                            int _routeIndex, int _moveBudget, EnemyBoardMode _boardMode, EnemyBoardState _boardState)
 
 // Output에는 계산 결과값 보관용
-// public EnemyMoveBoardOutput(Vector2Int _nextPos, int _nextRouteIndex, EnemyBoardMode _boardMode)
-// {
-//      this.nextPos = _nextPos;
-//      this.nextRouteIndex = _nextRouteIndex;
-//      this.boardMode = _boardMode;
-// }
+// public EnemyMoveBoardOutput(Vector2Int _nextPos, int _nextRouteIndex,
+//                             EnemyBoardMode _boardMode, EnemyBoardState _boardState,
+//                             bool _arrived, int _spentBudget)
 // 메서드가 각각 존재한다.
 public class EnemyMoveBoardAI
 {
@@ -40,8 +37,8 @@ public class EnemyMoveBoardAI
     //      ▼
     //  nextPos = enemyPos
 
-    // 3. Output에는 최소한의 정보만 담는다.
-    // nextPos / nextRouteIndex / nextBoardMode
+    // 3. Output에는 산출 결과에 따라 컨트롤러에서 인스턴스의 상태 전환을 시킬 정보를 담는다.
+    // nextPos / nextRouteIndex / nextBoardMode / nextState / arrived / spentBudget
     public EnemyMoveBoardOutput Calculate(EnemyMoveBoardInput boardInput)
     {
         // 1) 기본값(실패 기본 수렴) 세팅
@@ -49,34 +46,65 @@ public class EnemyMoveBoardAI
         int nextRouteIndex = boardInput.routeIndex;
         EnemyBoardMode nextMode = boardInput.boardMode;
         EnemyBoardState nextState = boardInput.boardState;
+        bool arrived = false;
+        int spentBudget = 0;
 
         // 2) 조기 종료 조건(움직일 이유/능력이 없는 턴)
         // ‘이동 계산을 시도할 수 있는지’를 판단한다.
         // 이동 예산이 남아있지 않으면, if문에 진입하지 않는다.
         if (boardInput.moveBudget > 0)
         {
+            Vector2Int target;
             // 3) 목표 좌표(target) 결정
             if (boardInput.playerInRange)
             {
+                // enemyMode 결정
                 nextMode = EnemyBoardMode.Chase;
                 // playerPos 추적
+                target = boardInput.playerPos;
             }
             else
             {
+                // enemyMode 결정                
                 nextMode = EnemyBoardMode.Patrol;
                 if (boardInput.PatrolRoute.Count > 0)
-                {
-                    // 4) 도착 처리(Patrol)
-                    // 5) 경로 확인(갈 수 있는가 판단)
-                    // 6) 다음 칸 후보(nextPosCandidate) 선정
-                }
+                    // PatrolRoute추적
+                    target = boardInput.PatrolRoute[boardInput.routeIndex];
+                else
+                    // fallback
+                    target = boardInput.enemyPos;
             }
-            // 7) moveBudget 소비 판단
-            // 8) 다음 상태(nextMode) 판단
-            // 9) Output 생성해서 return
-        }
+            // 4) delta거리 추적 및 도착 처리(Patrol)
+            Vector2Int delta = target - boardInput.enemyPos;
+            arrived = (boardInput.enemyPos == target);
+            // 5) 경로 확인(갈 수 있는가 판단)
+            // 적 타입에 따라 이동가능한 벡터 수를 다르게 하고 싶다면,
+            // boardInput 스크립트에 int moveRange 변수를 추가하여 오버로딩 시키자.
+            // 여기서 주의할 점은 현재 enemyDir변수 네이밍을 그대로 따라가는 것은 가독성을 해친다.
+            // 추천 받은 변수 이름은 step
+            if (!arrived)
+            {
+                // 한 칸 이동 방향 계산
+                Vector2Int enemyDir = Vector2Int.zero;
 
-        return new EnemyMoveBoardOutput(nextPos, nextRouteIndex, nextMode, nextState);
+                if (delta.x > 0)        // 타겟이 오른쪽에 위치
+                    enemyDir = new Vector2Int(+1, 0);
+                else if (delta.x < 0)   // 타겟이 왼쪽에 위치
+                    enemyDir = new Vector2Int(-1, 0);
+                else if (delta.y > 0)   // x좌표 위치가 같을 때, 타겟이 위쪽에 위치
+                    enemyDir = new Vector2Int(0, +1);
+                else if (delta.y < 0)   // x좌표 위치가 같을 때, 타겟이 아래쪽에 위치
+                    enemyDir = new Vector2Int(0, -1);
+
+                // 6) 다음 칸 후보(nextPosCandidate) 선정
+                Vector2Int candidate = boardInput.enemyPos + enemyDir;
+                // 7) moveBudget 소비 판단 컨트롤러에 전달
+                spentBudget = 1;
+                nextPos = candidate;
+            }
+        }
+        // 8) Output 생성해서 return
+        return new EnemyMoveBoardOutput(nextPos, nextRouteIndex, nextMode, nextState, arrived, spentBudget);
     }
 }
 // <중요 학습 상황>

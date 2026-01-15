@@ -9,13 +9,18 @@ namespace Gameplay.Enemy
         public readonly int nextRouteIndex;
         public readonly EnemyBoardMode boardMode;
         public readonly EnemyBoardState boardState;
+        public readonly bool arrived;
+        public readonly int spentBudget;
         public EnemyMoveBoardOutput(Vector2Int _nextPos, int _nextRouteIndex,
-                                    EnemyBoardMode _boardMode, EnemyBoardState _boardState)
+                                    EnemyBoardMode _boardMode, EnemyBoardState _boardState,
+                                    bool _arrived, int _spentBudget)
         {
             this.nextPos = _nextPos;
             this.nextRouteIndex = _nextRouteIndex;
             this.boardMode = _boardMode;
             this.boardState = _boardState;
+            this.arrived = _arrived;
+            this.spentBudget = _spentBudget;
         }
     }
 
